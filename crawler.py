@@ -18,9 +18,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import threading as td
 import time
 
-list = ["https://play.google.com/store/apps"
-,"https://play.google.com/store/apps/details?id=com.squareup.apos.beta",
-"https://play.google.com/store/apps/category/FAMILY"]
+list = ["https://play.google.com/store/apps"]
 visited_links = set()
 c = td.Condition()
 WAIT_CYCLE = 3000
@@ -71,8 +69,8 @@ class crawler():
         # Get the url from the ref
         links = [link.get('href', '') for link in refs]
         for l in links:
-
-            str = "https://play.google.com"+l
+            if "https://play.google.com" not in l:
+                str = "https://play.google.com"+l
             c.acquire()
             if  "/apps/details?id=" in str and str not in visited_links:
                 if len(self.apps_privacy_dataset)%self.TO_CSV_NUMBER == 0:
