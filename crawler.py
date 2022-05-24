@@ -18,11 +18,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import threading as td
 import time
 
-list = ["https://play.google.com/store/apps"]
-visited_links = set()
-c = td.Condition()
-WAIT_CYCLE = 3000
-
 
 class crawler():
 
@@ -117,10 +112,19 @@ class crawler():
             else:
                 print("Page skipped")
         print("Empty QUEUE")
-i = 0
-for l in list:
-    # Example call
+        
+        
+       
+if __name__ == "__main__":
+    #list of entry points
+    link_list = ["https://play.google.com/store/apps"]
+    visited_links = set()
+    c = td.Condition()
+    WAIT_CYCLE = 3000
+    i = 0
+    for link in link_list:
+        # Example call
 
-    p = td.Thread(target=crawler(str(i)+".csv").explore, args=(l,))
-    p.start()
-    i+=1
+        p = td.Thread(target=crawler(str(i)+".csv").explore, args=(link,))
+        p.start()
+        i+=1
